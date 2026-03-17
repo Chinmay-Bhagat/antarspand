@@ -22,3 +22,10 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# VS Code
+.vscode/
+
+# SSH keys (never commit these)
+sshas
+sshas.pub
