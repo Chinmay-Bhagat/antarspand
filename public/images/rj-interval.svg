@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 330" width="640" height="330">
+  <defs>
+    <marker id="arr-right" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+      <path d="M0,0 L7,3.5 L0,7 Z" fill="#f0c040"/>
+    </marker>
+    <marker id="arr-left" markerWidth="7" markerHeight="7" refX="1" refY="3.5" orient="auto-start-reverse">
+      <path d="M0,0 L7,3.5 L0,7 Z" fill="#f0c040"/>
+    </marker>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="640" height="330" fill="#080910" rx="10"/>
+
+  <!-- Subtle divider between ECG and BCG sections -->
+  <line x1="55" y1="180" x2="590" y2="180" stroke="#1a1d2e" stroke-width="1"/>
+
+  <!-- ECG waveform -->
+  <path d="M 55,122
+           L 118,122
+           C 123,122 128,96 138,94
+           C 148,92 154,122 162,122
+           C 167,122 171,132 175,135
+           C 177,136 180,52 182,36
+           C 184,20 186,133 189,137
+           C 192,140 198,122 210,122
+           L 233,122
+           C 241,122 251,84 261,82
+           C 271,80 281,122 291,122
+           L 585,122"
+        fill="none" stroke="#00dfa0" stroke-width="2.5"
+        stroke-linecap="round" stroke-linejoin="round"
+        filter="url(#glow)"/>
+
+  <!-- BCG waveform -->
+  <path d="M 55,248
+           L 186,248
+           C 192,248 198,226 206,224
+           C 214,222 222,248 230,248
+           C 234,248 236,272 240,278
+           C 246,284 256,150 264,148
+           C 272,146 280,278 290,280
+           C 296,282 302,248 314,248
+           C 320,248 326,222 336,224
+           C 346,226 352,248 360,248
+           C 364,248 368,260 372,263
+           C 376,266 382,228 390,230
+           C 398,232 407,248 416,248
+           L 585,248"
+        fill="none" stroke="#00dfa0" stroke-width="2.5"
+        stroke-linecap="round" stroke-linejoin="round"
+        filter="url(#glow)"/>
+
+  <!-- RJ interval annotation -->
+  <!-- Vertical tick at R (x=182) -->
+  <line x1="182" y1="36" x2="182" y2="18" stroke="#f0c040" stroke-width="1.5"/>
+  <!-- Vertical dashed line from J peak (x=264, y=148) up to annotation row -->
+  <line x1="264" y1="148" x2="264" y2="18" stroke="#f0c040" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <!-- Horizontal double-headed arrow -->
+  <line x1="187" y1="18" x2="259" y2="18"
+        stroke="#f0c040" stroke-width="1.5"
+        marker-start="url(#arr-left)"
+        marker-end="url(#arr-right)"/>
+  <!-- RJ label -->
+  <text x="223" y="13" fill="#f0c040"
+        font-family="IBM Plex Mono, monospace" font-size="12"
+        text-anchor="middle" font-weight="600" letter-spacing="0.5">RJ interval</text>
+
+  <!-- ECG peak labels -->
+  <text x="138" y="84"  fill="#b8beca" font-family="IBM Plex Mono, monospace" font-size="13" text-anchor="middle">P</text>
+  <text x="171" y="152" fill="#b8beca" font-family="IBM Plex Mono, monospace" font-size="13">Q</text>
+  <text x="182" y="30"  fill="#b8beca" font-family="IBM Plex Mono, monospace" font-size="13" text-anchor="middle">R</text>
+  <text x="192" y="155" fill="#b8beca" font-family="IBM Plex Mono, monospace" font-size="13">S</text>
+  <text x="261" y="73"  fill="#b8beca" font-family="IBM Plex Mono, monospace" font-size="13" text-anchor="middle">T</text>
+
+  <!-- BCG peak labels -->
+  <text x="206" y="215" fill="#b8beca" font-family="IBM Plex Mono, monospace" font-size="13" text-anchor="middle">H</text>
+  <text x="240" y="298" fill="#b8beca" font-family="IBM Plex Mono, monospace" font-size="13" text-anchor="middle">I</text>
+  <text x="270" y="143" fill="#b8beca" font-family="IBM Plex Mono, monospace" font-size="13">J</text>
+  <text x="292" y="300" fill="#b8beca" font-family="IBM Plex Mono, monospace" font-size="13" text-anchor="middle">K</text>
+  <text x="337" y="215" fill="#b8beca" font-family="IBM Plex Mono, monospace" font-size="13" text-anchor="middle">L</text>
+  <text x="372" y="280" fill="#b8beca" font-family="IBM Plex Mono, monospace" font-size="13" text-anchor="middle">M</text>
+  <text x="391" y="220" fill="#b8beca" font-family="IBM Plex Mono, monospace" font-size="13" text-anchor="middle">N</text>
+
+  <!-- Section labels -->
+  <text x="57" y="119" fill="#7c8494" font-family="IBM Plex Mono, monospace" font-size="12">ECG</text>
+  <text x="57" y="245" fill="#7c8494" font-family="IBM Plex Mono, monospace" font-size="12">BCG</text>
+</svg>

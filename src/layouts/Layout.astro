@@ -1,0 +1,133 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+const {
+  title = 'The body speaks in waves — Chinmay Bhagat · Biosignal Engineering',
+  description = 'Deep dives into BCG signal processing, sleep-stage AI, sensor design, and the engineering behind contactless health monitoring.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="author" content="Chinmay Bhagat" />
+  <link rel="icon" href="/favicon.ico" />
+
+  <!-- OpenGraph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:site_name" content="The body speaks in waves" />
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,400&family=IBM+Plex+Mono:wght@300;400&family=IBM+Plex+Sans:ital,wght@0,300;0,400;1,300&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Global CSS -->
+  <link rel="stylesheet" href="/styles/global.css" />
+</head>
+
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <div id="cur" aria-hidden="true"></div>
+  <div id="cur-r" aria-hidden="true"></div>
+
+  <header role="banner">
+    <a href="/" class="brand" aria-label="The body speaks in waves — home">
+      <span class="brand-name">The body speaks <em>in waves</em></span>
+      <span class="brand-sub" aria-label="HealthTech, Signal Processing, AI/ML">HealthTech · Signal Processing · AI/ML</span>
+    </a>
+    <nav role="navigation" aria-label="Primary navigation" id="main-nav">
+      <a href="/#articles">Articles</a>
+      <a href="/#insights">Insights</a>
+<a href="/#connect" class="nav-connect">Connect →</a>
+    </nav>
+    <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="main-nav" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <slot />
+
+  <footer role="contentinfo">
+    <p class="foot-brand">The body speaks <em>in waves</em></p>
+    <p class="foot-meta">
+      © 2026 Chinmay Bhagat · HealthTech<br />
+      <b>BCG</b> · <b>HRV</b> · <b>Sleep Staging</b>
+    </p>
+  </footer>
+
+  <script>
+    'use strict';
+    const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* ── Mobile Nav Toggle ─────────────────────────── */
+    const navToggle = document.getElementById('nav-toggle');
+    const mainNav   = document.getElementById('main-nav');
+    if (navToggle && mainNav) {
+      navToggle.addEventListener('click', () => {
+        const open = mainNav.classList.toggle('open');
+        navToggle.setAttribute('aria-expanded', String(open));
+        const spans = navToggle.querySelectorAll('span');
+        spans[0].style.transform = open ? 'rotate(45deg) translate(4px,4px)' : '';
+        spans[1].style.opacity   = open ? '0' : '1';
+        spans[2].style.transform = open ? 'rotate(-45deg) translate(4px,-4px)' : '';
+      });
+      mainNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+        mainNav.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      }));
+    }
+
+    /* ── Custom Cursor ─────────────────────────────── */
+    if (!REDUCED) (function () {
+      const cur  = document.getElementById('cur');
+      const curR = document.getElementById('cur-r');
+      if (!cur || !curR) return;
+      let mx = -300, my = -300, rx = -300, ry = -300, ready = false;
+      document.addEventListener('mousemove', e => {
+        mx = e.clientX; my = e.clientY;
+        if (!ready) {
+          ready = true; rx = mx; ry = my;
+          cur.style.display = curR.style.display = 'block';
+          document.body.style.cursor = 'none';
+        }
+      }, { passive: true });
+      document.addEventListener('mouseleave', () => { cur.style.opacity = curR.style.opacity = '0'; });
+      document.addEventListener('mouseenter', () => { cur.style.opacity = curR.style.opacity = '1'; });
+      (function loop() {
+        cur.style.left  = mx + 'px'; cur.style.top  = my + 'px';
+        rx += (mx - rx) * .10; ry += (my - ry) * .10;
+        curR.style.left = rx + 'px'; curR.style.top = ry + 'px';
+        requestAnimationFrame(loop);
+      })();
+      document.querySelectorAll('button, a, .card, .fpill').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          cur.style.width = cur.style.height = '14px';
+          curR.style.width = curR.style.height = '44px';
+          curR.style.borderColor = 'rgba(0,223,160,.8)';
+        });
+        el.addEventListener('mouseleave', () => {
+          cur.style.width = cur.style.height = '8px';
+          curR.style.width = curR.style.height = '34px';
+          curR.style.borderColor = 'rgba(0,223,160,.55)';
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

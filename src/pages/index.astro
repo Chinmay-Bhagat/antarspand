@@ -1,0 +1,507 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog');
+const posts = allPosts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+const featured = posts.find(p => p.data.featured);
+const rest = posts.filter(p => !p.data.featured);
+---
+
+<Layout>
+  <main id="main-content">
+
+    <!-- ══ HERO ══ -->
+    <section class="hero" aria-label="Hero">
+      <canvas id="hero-canvas" aria-hidden="true" role="presentation"></canvas>
+      <div class="hero-inner">
+        <div class="hero-eyebrow" aria-label="Live signal: BCG Channel 1, PVDF sensor at 250 Hz">
+          <span class="live-dot" aria-hidden="true"></span>BCG Channel 1 · PVDF · 250 Hz
+        </div>
+        <h1 class="hero-title">
+          <span class="hero-line"><span class="hero-line-inner t-normal">The body</span></span>
+          <span class="hero-line"><span class="hero-line-inner t-normal">speaks</span></span>
+          <span class="hero-line"><span class="hero-line-inner t-italic">in waves.</span></span>
+        </h1>
+        <p class="hero-desc">
+          Deep dives into the engineering behind wearable health tech —
+          BCG signal processing, sleep-stage AI, sensor design, and the systems
+          that make non-invasive monitoring possible.
+        </p>
+        <div class="hero-actions">
+          <a href="#articles" class="btn-primary">Read Latest</a>
+          <a href="#articles" class="btn-ghost">Browse Topics</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ HEALTH INSIGHTS SLIDER ══ -->
+    <section class="sec" id="insights" aria-labelledby="insights-heading">
+      <p class="sec-eyebrow" aria-hidden="true">Why Your Health Can't Wait</p>
+      <h2 class="sec-h2" id="insights-heading">What your body is telling you</h2>
+
+      <div class="slider" id="insights-slider" aria-roledescription="carousel" aria-label="Health insights">
+
+        <div class="slider-track" id="slider-track">
+
+          <div class="slide" role="group" aria-roledescription="slide" aria-label="1 of 6">
+            <div class="slide-counter" aria-hidden="true">01 / 06</div>
+            <div class="slide-stat">19.8M</div>
+            <h3 class="slide-title">Heart disease is the #1 cause of death globally — every single year.</h3>
+            <p class="slide-body">19.8 million people die from cardiovascular conditions annually. Most of these conditions are detectable early — the challenge is that the warning signals appear long before any symptoms do.</p>
+            <div class="slide-source">WHO / Global Burden of Disease 2022</div>
+          </div>
+
+          <div class="slide" role="group" aria-roledescription="slide" aria-label="2 of 6">
+            <div class="slide-counter" aria-hidden="true">02 / 06</div>
+            <div class="slide-stat">10+ years</div>
+            <h3 class="slide-title">Heart disease builds quietly for over a decade before you feel anything.</h3>
+            <p class="slide-body">By the time most people receive a diagnosis, the condition has been developing silently for years. Early detection — not just treatment — is what changes outcomes.</p>
+            <div class="slide-source">American Heart Association · ESC Guidelines 2023</div>
+          </div>
+
+          <div class="slide" role="group" aria-roledescription="slide" aria-label="3 of 6">
+            <div class="slide-counter" aria-hidden="true">03 / 06</div>
+            <div class="slide-stat">1 Billion</div>
+            <h3 class="slide-title">Around 1 billion people have sleep apnea. Most don't know it.</h3>
+            <p class="slide-body">Sleep apnea causes brief pauses in breathing during sleep, repeatedly straining your heart through the night. A simple sensor under your mattress can detect it passively — no clinic visit needed.</p>
+            <div class="slide-source">Lancet Respiratory Medicine 2019</div>
+          </div>
+
+          <div class="slide" role="group" aria-roledescription="slide" aria-label="4 of 6">
+            <div class="slide-counter" aria-hidden="true">04 / 06</div>
+            <div class="slide-stat">Days early</div>
+            <h3 class="slide-title">Your heartbeat rhythm changes before you feel sick.</h3>
+            <p class="slide-body">Heart rate variability (HRV) — the slight variation between each heartbeat — reflects how well your body is coping. It drops days before illness, burnout, or a cardiac event, giving you an early window to act.</p>
+            <div class="slide-source">Frontiers in Neuroscience 2020</div>
+          </div>
+
+          <div class="slide" role="group" aria-roledescription="slide" aria-label="5 of 6">
+            <div class="slide-counter" aria-hidden="true">05 / 06</div>
+            <div class="slide-stat">&lt; 5%</div>
+            <h3 class="slide-title">Almost nobody monitors their sleep health — even once.</h3>
+            <p class="slide-body">Yet sleep is when your body repairs itself and your heart works hardest. A single night of data can reveal patterns that a routine checkup would completely miss.</p>
+            <div class="slide-source">Sleep Advisor Global Survey 2024</div>
+          </div>
+
+          <div class="slide" role="group" aria-roledescription="slide" aria-label="6 of 6">
+            <div class="slide-counter" aria-hidden="true">06 / 06</div>
+            <div class="slide-stat">~$0</div>
+            <h3 class="slide-title">Passive nightly monitoring now costs nothing extra.</h3>
+            <p class="slide-body">A hospital sleep study costs $3,000–$5,000 and happens once. A contactless sensor under your mattress tracks your heart rate, breathing, and sleep stages every night — automatically, with no wires or effort.</p>
+            <div class="slide-source">DreamSleep · Clinical cost comparison 2024</div>
+          </div>
+
+        </div>
+
+        <div class="slider-controls">
+          <button class="slider-btn" id="slider-prev" aria-label="Previous insight">←</button>
+          <div class="slider-dots" id="slider-dots" role="tablist" aria-label="Select insight">
+            <button class="sdot on" role="tab" aria-selected="true" aria-label="Insight 1" data-idx="0"></button>
+            <button class="sdot" role="tab" aria-selected="false" aria-label="Insight 2" data-idx="1"></button>
+            <button class="sdot" role="tab" aria-selected="false" aria-label="Insight 3" data-idx="2"></button>
+            <button class="sdot" role="tab" aria-selected="false" aria-label="Insight 4" data-idx="3"></button>
+            <button class="sdot" role="tab" aria-selected="false" aria-label="Insight 5" data-idx="4"></button>
+            <button class="sdot" role="tab" aria-selected="false" aria-label="Insight 6" data-idx="5"></button>
+          </div>
+          <button class="slider-btn" id="slider-next" aria-label="Next insight">→</button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══ ARTICLES ══ -->
+    <section class="sec sec-alt" id="articles" aria-labelledby="articles-heading">
+      <p class="sec-eyebrow" aria-hidden="true">Articles</p>
+      <h2 class="sec-h2" id="articles-heading">Latest writing</h2>
+
+      <div class="filter-row" role="group" aria-label="Filter articles by category" id="filter-row">
+        <button class="fpill on" data-cat="all" aria-pressed="true">All</button>
+        <button class="fpill" data-cat="bcg" aria-pressed="false">BCG / HRV</button>
+        <button class="fpill" data-cat="ai" aria-pressed="false">AI / ML</button>
+        <button class="fpill" data-cat="hw" aria-pressed="false">Sensor Hardware</button>
+        <button class="fpill" data-cat="hc" aria-pressed="false">HealthTech</button>
+        <button class="fpill" data-cat="ml" aria-pressed="false">Deep Learning</button>
+      </div>
+
+      <div class="ag" id="article-grid" role="list" aria-label="Articles">
+
+        {featured && (
+          <a href={`/blog/${featured.id}`} class="card card-feat" data-cat={featured.data.category} role="listitem">
+            <span class={`tag tag-${featured.data.category}`}>{featured.data.tag}</span>
+            <h3 class="card-title">{featured.data.title}</h3>
+            <p class="card-body">{featured.data.excerpt}</p>
+            <footer class="card-meta">
+              <span>Chinmay Bhagat</span><span class="cdot" aria-hidden="true"></span>
+              <span>{featured.data.readTime} min read</span><span class="cdot" aria-hidden="true"></span>
+              <time datetime={featured.data.date}>{featured.data.dateDisplay}</time>
+            </footer>
+            <span class="card-readmore" aria-hidden="true">Read article →</span>
+          </a>
+        )}
+
+        {rest.map((post) => (
+          <a href={`/blog/${post.id}`} class="card card-bt" data-cat={post.data.category} role="listitem">
+            <span class={`tag tag-${post.data.category}`}>{post.data.tag}</span>
+            <h3 class="card-title">{post.data.title}</h3>
+            {post.data.excerpt && <p class="card-body">{post.data.excerpt}</p>}
+            <footer class="card-meta">
+              <span>{post.data.readTime} min read</span><span class="cdot" aria-hidden="true"></span>
+              <time datetime={post.data.date}>{post.data.dateDisplay}</time>
+            </footer>
+            <span class="card-readmore" aria-hidden="true">Read →</span>
+          </a>
+        ))}
+
+      </div>
+    </section>
+
+    <!-- ══ ABOUT ══ -->
+    <section class="sec sec-alt" id="about" aria-labelledby="about-heading">
+      <p class="sec-eyebrow" aria-hidden="true">About the Author</p>
+      <h2 class="sec-h2" id="about-heading" style="margin-bottom:3rem;">The person <em>behind the signal</em></h2>
+
+      <div class="port-wrap rv">
+        <aside class="port-side" aria-label="Author information">
+          <div>
+            <div class="port-avi" aria-label="Initials: C for Chinmay" role="img">C</div>
+            <p class="port-name">Chinmay Bhagat</p>
+            <p class="port-role">Senior Data Scientist</p>
+            <p class="port-org">HealthTech · Bengaluru, India</p>
+          </div>
+          <p class="port-bio">Building the signal processing pipeline behind next-generation contactless sleep monitoring. My work spans the full stack — from raw PVDF sensor physics and BCG/ECG fusion to on-device ML and sleep stage classification. I write here to make the hard parts of health sensor engineering less opaque.</p>
+          <div class="skills-block">
+            <p class="skills-label">Expertise</p>
+            <div class="skills-wrap" role="list">
+              <span class="sk hot" role="listitem">BCG Processing</span>
+              <span class="sk hot" role="listitem">ECG / HRV</span>
+              <span class="sk hot" role="listitem">Sleep Staging</span>
+              <span class="sk hot" role="listitem">Python · NumPy</span>
+              <span class="sk" role="listitem">PVDF Sensors</span>
+              <span class="sk" role="listitem">Polar H10 · BLE</span>
+              <span class="sk" role="listitem">Transformer Models</span>
+              <span class="sk" role="listitem">CWT / Wavelets</span>
+              <span class="sk" role="listitem">Knowledge Distil.</span>
+              <span class="sk" role="listitem">SHHS Dataset</span>
+              <span class="sk" role="listitem">iOS / Swift</span>
+              <span class="sk" role="listitem">SQI Design</span>
+            </div>
+          </div>
+        </aside>
+
+        <div class="port-main">
+          <div class="port-connect-row" id="connect">
+            <div class="port-connect-btns">
+              <a href="mailto:chinmay@dreamsleep.co.in" class="pcbtn pcbtn-primary" aria-label="Send email to Chinmay">
+                <span class="pcbtn-icon" aria-hidden="true">✉</span>
+                <span class="pcbtn-text">
+                  <span class="pcbtn-action">Email me</span>
+                  <span class="pcbtn-sub">chinmay@dreamsleep.co.in</span>
+                </span>
+              </a>
+              <a href="https://linkedin.com/in/chinmay-bhagat" target="_blank" rel="noopener noreferrer" class="pcbtn" aria-label="Connect on LinkedIn">
+                <span class="pcbtn-icon" aria-hidden="true">in</span>
+                <span class="pcbtn-text">
+                  <span class="pcbtn-action">Connect on LinkedIn</span>
+                  <span class="pcbtn-sub">Let's talk signal engineering</span>
+                </span>
+              </a>
+            </div>
+          </div>
+
+          <ol class="proj-list" aria-label="Featured projects" style="list-style:none;">
+            <li class="proj-item">
+              <span class="proj-num" aria-hidden="true">01</span>
+              <div>
+                <h3 class="proj-title">ECG–BCG Synchronization Pipeline</h3>
+                <p class="proj-desc">Full-stack system aligning Polar H10 ECG with POD4 PVDF BCG. Cross-correlation global sync + R-to-J peak matching, ±50ms delay handling, drift logging, interactive alignment UI.</p>
+                <ul class="proj-stack" style="list-style:none;"><li class="ps">Python</li><li class="ps">NumPy/SciPy</li><li class="ps">asyncio/BLE</li><li class="ps">Polar H10</li><li class="ps">PVDF</li></ul>
+              </div>
+            </li>
+            <li class="proj-item">
+              <span class="proj-num" aria-hidden="true">02</span>
+              <div>
+                <h3 class="proj-title">Sleep Staging Transformer (BCG)</h3>
+                <p class="proj-desc">Transformer trained on SHHS for 4-class sleep staging per 30s epoch. Knowledge distillation from ECG teacher (85% acc) to BCG student model.</p>
+                <ul class="proj-stack" style="list-style:none;"><li class="ps">PyTorch</li><li class="ps">SHHS</li><li class="ps">Transformer</li><li class="ps">Distillation</li><li class="ps">HRV</li></ul>
+              </div>
+            </li>
+            <li class="proj-item">
+              <span class="proj-num" aria-hidden="true">03</span>
+              <div>
+                <h3 class="proj-title">iOS Background ECG Recorder</h3>
+                <p class="proj-desc">Swift app for overnight BLE ECG from Polar H10. Solved 7-year epoch offset bug, timestamp reconstruction, 5-min rotation, iOS background execution constraints.</p>
+                <ul class="proj-stack" style="list-style:none;"><li class="ps">Swift</li><li class="ps">CoreBluetooth</li><li class="ps">Background Tasks</li></ul>
+              </div>
+            </li>
+            <li class="proj-item">
+              <span class="proj-num" aria-hidden="true">04</span>
+              <div>
+                <h3 class="proj-title">Signal Quality Index (SQI)</h3>
+                <p class="proj-desc">Pre-training classifier for BCG segment quality. SNR + template correlation + Isolation Forest motion detection. Adaptive threshold replacing GMM.</p>
+                <ul class="proj-stack" style="list-style:none;"><li class="ps">scikit-learn</li><li class="ps">Isolation Forest</li><li class="ps">CWT/Ricker</li><li class="ps">8–20Hz BPF</li></ul>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</Layout>
+
+<script>
+  'use strict';
+  const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ── BCG Signal Generator ──────────────────────── */
+  class BCGGen {
+    fs: number; t: number; beatT: number; beatPeriod: number;
+    hrv: number; n1: number; n2: number; w1: number; w2: number; ampJitter: number;
+    constructor(fs: number) {
+      this.fs = fs; this.t = 0;
+      this.beatT = 0; this.beatPeriod = 1 / 1.08;
+      this.hrv = 0; this.n1 = 0; this.n2 = 0;
+      this.w1 = 0; this.w2 = 0.7; this.ampJitter = 1.0;
+    }
+    next() {
+      const dt = 1 / this.fs;
+      this.t += dt; this.beatT += dt;
+      const resp = Math.sin(2 * Math.PI * 0.18 * this.t);
+      this.w1 += dt * 2 * Math.PI * 0.045;
+      this.w2 += dt * 2 * Math.PI * 0.031;
+      const wander = 0.07 * Math.sin(this.w1) + 0.04 * Math.sin(this.w2);
+      const white = (Math.random() - 0.5);
+      this.n1 = 0.88 * this.n1 + 0.12 * white;
+      this.n2 = 0.94 * this.n2 + 0.06 * this.n1;
+      const noise = 0.022 * this.n2;
+      const aj = this.ampJitter;
+      const j = aj * 0.72 * Math.exp(-0.5 * Math.pow((this.beatT - 0.050) / 0.015, 2));
+      const k = aj * -0.42 * Math.exp(-0.5 * Math.pow((this.beatT - 0.095) / 0.012, 2));
+      const l = aj * 0.20 * Math.exp(-0.5 * Math.pow((this.beatT - 0.140) / 0.013, 2));
+      if (this.beatT >= this.beatPeriod) {
+        this.beatT -= this.beatPeriod;
+        this.hrv = 0.72 * this.hrv + 0.28 * (Math.random() - 0.5) * 0.18;
+        this.hrv = Math.max(-0.12, Math.min(0.12, this.hrv));
+        this.beatPeriod = (1 / 1.08) * (1 + this.hrv);
+        this.ampJitter = 0.7 * this.ampJitter + 0.3 * (0.85 + Math.random() * 0.30);
+      }
+      return resp + wander + j + k + l + noise;
+    }
+  }
+
+  const FS = 250;
+
+  /* ── Hero Canvas ───────────────────────────────── */
+  (function () {
+    const c = document.getElementById('hero-canvas') as HTMLCanvasElement;
+    if (!c) return;
+    const ctx = c.getContext('2d')!;
+    let w: number, h: number, bufs: Float32Array[] | null = null;
+    let visible = true;
+
+    const gens = [new BCGGen(FS), new BCGGen(FS), new BCGGen(FS)];
+    for (let i = 0; i < FS * 2; i++) gens[1].next();
+    for (let i = 0; i < FS * 5; i++) gens[2].next();
+
+    const ADVANCE = REDUCED ? 0 : 4;
+    const rows = [
+      { y: .38, a: .26, lw: 1.1, col: '#5b9bd5' },
+      { y: .56, a: .46, lw: 1.6, col: '#00dfa0' },
+      { y: .76, a: .13, lw: .85, col: '#00dfa0' },
+    ];
+
+    function resize() {
+      w = c.width = window.innerWidth;
+      h = c.height = window.innerHeight;
+      bufs = [new Float32Array(w), new Float32Array(w), new Float32Array(w)];
+      for (let i = 0; i < w; i++) {
+        bufs[0][i] = gens[0].next();
+        bufs[1][i] = gens[1].next();
+        bufs[2][i] = gens[2].next();
+      }
+    }
+
+    function draw() {
+      if (!bufs || !visible) return;
+      ctx.clearRect(0, 0, w, h);
+      rows.forEach((r, ri) => {
+        const buf = bufs![ri], gen = gens[ri];
+        if (!REDUCED) {
+          for (let a = 0; a < ADVANCE; a++) {
+            buf.copyWithin(0, 1);
+            buf[w - 1] = gen.next();
+          }
+        }
+        ctx.beginPath();
+        for (let x = 0; x < w; x++) {
+          const y = h * r.y - buf[x] * h * .115;
+          x ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
+        }
+        ctx.shadowColor = r.col; ctx.shadowBlur = 9;
+        ctx.strokeStyle = r.col; ctx.lineWidth = r.lw;
+        ctx.globalAlpha = r.a; ctx.stroke();
+      });
+      ctx.globalAlpha = 1; ctx.shadowBlur = 0;
+      requestAnimationFrame(draw);
+    }
+
+    const heroObs = new IntersectionObserver(([e]) => {
+      visible = e.isIntersecting;
+      if (visible) draw();
+    }, { threshold: 0 });
+    heroObs.observe(c.parentElement || c);
+
+    requestAnimationFrame(() => { resize(); draw(); });
+    window.addEventListener('resize', resize, { passive: true });
+  })();
+
+  /* ── Donut ─────────────────────────────────────── */
+  (function () {
+    const c = document.getElementById('donut-c') as HTMLCanvasElement;
+    if (!c) return;
+    const ctx = c.getContext('2d')!;
+    let started = false;
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting && !started) {
+        started = true;
+        let p = 0;
+        function draw() {
+          ctx.clearRect(0, 0, 96, 96);
+          ctx.beginPath(); ctx.arc(48, 48, 38, 0, Math.PI * 2);
+          ctx.strokeStyle = 'rgba(240,77,106,.1)'; ctx.lineWidth = 8; ctx.stroke();
+          ctx.beginPath(); ctx.arc(48, 48, 38, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * p);
+          ctx.strokeStyle = '#f04d6a'; ctx.lineWidth = 8;
+          ctx.shadowColor = '#f04d6a'; ctx.shadowBlur = 8; ctx.stroke(); ctx.shadowBlur = 0;
+          if (p < .87) { p += .014; requestAnimationFrame(draw); }
+        }
+        draw();
+      }
+    }, { threshold: 0.3 });
+    io.observe(c);
+  })();
+
+  /* ── HRV Sparkline ─────────────────────────────── */
+  (function () {
+    const c = document.getElementById('hrv-c') as HTMLCanvasElement;
+    if (!c) return;
+    const ctx = c.getContext('2d')!, H = 75;
+    c.height = H;
+    function draw() {
+      c.width = c.parentElement ? (c.parentElement.clientWidth || 400) : 400;
+      const pts = [54,56,58,55,52,48,42,38,34,31,36,41,46,49,51,50,48,44,40,38,42,46,50,53,55,57,56,54];
+      const mn = Math.min(...pts) - 4, mx = Math.max(...pts) + 4, w = c.width, step = w / (pts.length - 1);
+      const g = ctx.createLinearGradient(0, 0, 0, H);
+      g.addColorStop(0, 'rgba(0,223,160,.16)'); g.addColorStop(1, 'rgba(0,223,160,0)');
+      ctx.beginPath();
+      pts.forEach((v, i) => { const x = i * step, y = H - ((v - mn) / (mx - mn)) * H; i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); });
+      ctx.strokeStyle = '#00dfa0'; ctx.lineWidth = 1.5; ctx.shadowColor = '#00dfa0'; ctx.shadowBlur = 4; ctx.stroke(); ctx.shadowBlur = 0;
+      ctx.lineTo(w, H); ctx.lineTo(0, H); ctx.closePath(); ctx.fillStyle = g; ctx.fill();
+      const di = pts.indexOf(Math.min(...pts));
+      ctx.beginPath(); ctx.arc(di * step, H - ((pts[di] - mn) / (mx - mn)) * H, 4, 0, Math.PI * 2);
+      ctx.fillStyle = '#f04d6a'; ctx.shadowColor = '#f04d6a'; ctx.shadowBlur = 10; ctx.fill(); ctx.shadowBlur = 0;
+    }
+    draw();
+    window.addEventListener('resize', draw, { passive: true });
+  })();
+
+  /* ── Scroll Reveal ─────────────────────────────── */
+  if (!REDUCED) {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const siblings = [...(e.target.parentNode as Element).children].filter(c => c.classList.contains('rv'));
+          const idx = siblings.indexOf(e.target as Element);
+          setTimeout(() => e.target.classList.add('in'), idx * 80);
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.rv').forEach(el => io.observe(el));
+  } else {
+    document.querySelectorAll('.rv').forEach(el => el.classList.add('in'));
+  }
+
+  /* ── Category Filter ───────────────────────────── */
+  const filterRow = document.getElementById('filter-row');
+  if (filterRow) {
+    filterRow.addEventListener('click', e => {
+      const btn = (e.target as Element).closest('.fpill') as HTMLElement | null;
+      if (!btn) return;
+      const cat = btn.dataset.cat;
+      document.querySelectorAll('.fpill').forEach(b => {
+        b.classList.remove('on');
+        b.setAttribute('aria-pressed', 'false');
+      });
+      btn.classList.add('on');
+      btn.setAttribute('aria-pressed', 'true');
+      document.querySelectorAll('#article-grid .card').forEach(c => {
+        const el = c as HTMLElement;
+        const show = cat === 'all' || el.dataset.cat === cat;
+        el.setAttribute('aria-hidden', show ? 'false' : 'true');
+      });
+    });
+  }
+
+  /* ── Health Insights Slider ─────────────────────────── */
+  (function () {
+    const track   = document.getElementById('slider-track') as HTMLElement | null;
+    const prev    = document.getElementById('slider-prev') as HTMLButtonElement | null;
+    const next    = document.getElementById('slider-next') as HTMLButtonElement | null;
+    const dotsEl  = document.getElementById('slider-dots');
+    const slider  = document.getElementById('insights-slider');
+    if (!track || !prev || !next || !dotsEl || !slider) return;
+
+    const slides  = track.querySelectorAll('.slide');
+    const dots    = dotsEl.querySelectorAll('.sdot') as NodeListOf<HTMLElement>;
+    const total   = slides.length;
+    let current   = 0;
+    let timer: ReturnType<typeof setInterval>;
+
+    function goTo(idx: number) {
+      slides[current].setAttribute('aria-hidden', 'true');
+      dots[current].classList.remove('on');
+      dots[current].setAttribute('aria-selected', 'false');
+      current = (idx + total) % total;
+      track.style.transform = `translateX(-${current * 100}%)`;
+      slides[current].setAttribute('aria-hidden', 'false');
+      dots[current].classList.add('on');
+      dots[current].setAttribute('aria-selected', 'true');
+      slider.setAttribute('aria-label', `Health insights, slide ${current + 1} of ${total}`);
+    }
+
+    // Hide all but first on init
+    slides.forEach((s, i) => s.setAttribute('aria-hidden', i === 0 ? 'false' : 'true'));
+
+    prev.addEventListener('click', () => { goTo(current - 1); resetTimer(); });
+    next.addEventListener('click', () => { goTo(current + 1); resetTimer(); });
+
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        goTo(Number(dot.dataset.idx));
+        resetTimer();
+      });
+    });
+
+    // Keyboard: left/right arrows when slider is focused
+    slider.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft')  { goTo(current - 1); resetTimer(); }
+      if (e.key === 'ArrowRight') { goTo(current + 1); resetTimer(); }
+    });
+
+    function startTimer() {
+      timer = setInterval(() => goTo(current + 1), 6000);
+    }
+    function resetTimer() {
+      clearInterval(timer);
+      startTimer();
+    }
+
+    slider.addEventListener('mouseenter', () => clearInterval(timer));
+    slider.addEventListener('mouseleave', startTimer);
+    slider.addEventListener('focusin',    () => clearInterval(timer));
+    slider.addEventListener('focusout',   startTimer);
+
+    startTimer();
+  })();
+</script>

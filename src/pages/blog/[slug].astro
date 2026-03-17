@@ -1,0 +1,65 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(post => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { data } = post;
+const { Content } = await render(post);
+
+// Sorted posts for prev/next navigation
+const allPosts = await getCollection('blog');
+const sorted = allPosts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+const idx = sorted.findIndex(p => p.id === post.id);
+const prev = sorted[idx + 1] ?? null;
+const next = sorted[idx - 1] ?? null;
+---
+
+<Layout title={`${data.title} — Chinmay Bhagat`} description={data.excerpt}>
+  <main id="main-content">
+
+    <!-- ══ ARTICLE HERO ══ -->
+    <div class="art-hero">
+      <p class="art-eyebrow">
+        <span class="live-dot" aria-hidden="true"></span>
+        <span class={`tag tag-${data.category}`}>{data.tag}</span>
+      </p>
+      <h1 class="art-title">{data.title}</h1>
+      <div class="art-meta">
+        <span>Chinmay Bhagat</span>
+        <span class="cdot" aria-hidden="true"></span>
+        <span>{data.readTime} min read</span>
+        <span class="cdot" aria-hidden="true"></span>
+        <time datetime={data.date}>{data.dateDisplay}</time>
+      </div>
+    </div>
+
+    <!-- ══ ARTICLE BODY ══ -->
+    <div class="art-body">
+      <Content />
+    </div>
+
+    <!-- ══ PREV / NEXT NAV ══ -->
+    <nav class="art-nav" aria-label="Article navigation">
+      {prev ? (
+        <a href={`/blog/${prev.id}`} class="art-nav-btn">← {prev.data.title}</a>
+      ) : (
+        <span></span>
+      )}
+      <a href="/" class="art-nav-btn primary">All Articles</a>
+      {next ? (
+        <a href={`/blog/${next.id}`} class="art-nav-btn">{next.data.title} →</a>
+      ) : (
+        <span></span>
+      )}
+    </nav>
+
+  </main>
+</Layout>
