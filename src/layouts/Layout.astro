@@ -37,6 +37,35 @@ const {
     rel="stylesheet"
   />
 
+  <!-- Canonical URL -->
+  <link rel="canonical" href={new URL(Astro.url.pathname, 'https://antarspand.com').href} />
+
+  <!-- JSON-LD: Person + WebSite -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://antarspand.com/#chinmay",
+        "name": "Chinmay Bhagat",
+        "url": "https://antarspand.com",
+        "jobTitle": "Senior Data Scientist",
+        "worksFor": { "@type": "Organization", "name": "DreamSleep", "url": "https://dreamsleep.co.in" },
+        "email": "chinmay@dreamsleep.co.in",
+        "sameAs": ["https://www.linkedin.com/in/chinmay-bhagat"],
+        "knowsAbout": ["BCG signal processing", "ECG", "HRV", "Sleep staging", "Wearable health tech", "Biosignal engineering"]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://antarspand.com/#website",
+        "url": "https://antarspand.com",
+        "name": "The body speaks in waves",
+        "description": "Deep dives into BCG signal processing, sleep-stage AI, sensor design, and the engineering behind contactless health monitoring.",
+        "author": { "@id": "https://antarspand.com/#chinmay" }
+      }
+    ]
+  })} />
+
   <!-- Global CSS -->
   <link rel="stylesheet" href="/styles/global.css" />
 </head>
