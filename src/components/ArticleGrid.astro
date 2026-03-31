@@ -1,0 +1,52 @@
+---
+import ArticleCard from './ArticleCard.astro';
+
+interface Props {
+  posts: any[];
+  featured?: any;
+}
+const { posts, featured } = Astro.props;
+---
+
+<section class="sec sec-alt" id="articles" aria-labelledby="articles-heading">
+  <p class="sec-eyebrow" aria-hidden="true">Articles</p>
+  <h2 class="sec-h2" id="articles-heading">Latest writing</h2>
+
+  <div class="filter-row" role="group" aria-label="Filter articles by category" id="filter-row">
+    <button class="fpill on" data-cat="all" aria-pressed="true">All</button>
+    <button class="fpill" data-cat="bcg" aria-pressed="false">BCG / HRV</button>
+    <button class="fpill" data-cat="ai" aria-pressed="false">AI / ML</button>
+    <button class="fpill" data-cat="hw" aria-pressed="false">Sensor Hardware</button>
+    <button class="fpill" data-cat="hc" aria-pressed="false">HealthTech</button>
+    <button class="fpill" data-cat="ml" aria-pressed="false">Deep Learning</button>
+  </div>
+
+  <div class="ag" id="article-grid" role="list" aria-label="Articles">
+    {featured && <ArticleCard post={featured} featured={true} />}
+    {posts.map((post) => <ArticleCard post={post} />)}
+  </div>
+</section>
+
+<script>
+  'use strict';
+
+  const filterRow = document.getElementById('filter-row');
+  if (filterRow) {
+    filterRow.addEventListener('click', e => {
+      const btn = (e.target as Element).closest('.fpill') as HTMLElement | null;
+      if (!btn) return;
+      const cat = btn.dataset.cat;
+      document.querySelectorAll('.fpill').forEach(b => {
+        b.classList.remove('on');
+        b.setAttribute('aria-pressed', 'false');
+      });
+      btn.classList.add('on');
+      btn.setAttribute('aria-pressed', 'true');
+      document.querySelectorAll('#article-grid .card').forEach(c => {
+        const el = c as HTMLElement;
+        const show = cat === 'all' || el.dataset.cat === cat;
+        el.setAttribute('aria-hidden', show ? 'false' : 'true');
+      });
+    });
+  }
+</script>

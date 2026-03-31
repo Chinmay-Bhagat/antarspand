@@ -1,0 +1,19 @@
+<div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
+
+<script>
+  'use strict';
+
+  const bar = document.getElementById('reading-progress');
+  const body = document.querySelector('.art-body');
+  if (bar && body) {
+    function update() {
+      const rect = body!.getBoundingClientRect();
+      const total = body!.scrollHeight;
+      const scrolled = -rect.top;
+      const progress = Math.max(0, Math.min(1, scrolled / (total - window.innerHeight)));
+      bar!.style.width = `${progress * 100}%`;
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  }
+</script>

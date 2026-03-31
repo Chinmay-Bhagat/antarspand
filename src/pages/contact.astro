@@ -1,0 +1,166 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Contact — Chinmay Bhagat" description="Get in touch to discuss biosignal engineering, health tech, or collaboration opportunities.">
+  <main id="main-content">
+    <div class="contact-page">
+      <p class="sec-eyebrow" aria-hidden="true">Contact</p>
+      <h1 class="sec-h2">Let's <em>connect</em></h1>
+      <p class="contact-desc">
+        Whether it's about BCG signal processing, health sensor design, ML for
+        biosignals, or potential collaboration — I'd like to hear from you.
+      </p>
+
+      <form
+        class="contact-form"
+        action="https://formspree.io/f/xnjovnyy"
+        method="POST"
+      >
+        <div class="cf-row">
+          <label class="cf-label" for="name">Name</label>
+          <input class="cf-input" type="text" id="name" name="name" placeholder="Your name" required />
+        </div>
+
+        <div class="cf-row">
+          <label class="cf-label" for="email">Email</label>
+          <input class="cf-input" type="email" id="email" name="email" placeholder="your@email.com" required />
+        </div>
+
+        <div class="cf-row">
+          <label class="cf-label" for="phone">Contact Number</label>
+          <input class="cf-input" type="tel" id="phone" name="phone" placeholder="+91 XXXXX XXXXX" />
+        </div>
+
+        <div class="cf-row">
+          <label class="cf-label" for="message">Message</label>
+          <textarea class="cf-input cf-textarea" id="message" name="message" placeholder="What would you like to discuss?" rows="5" required></textarea>
+        </div>
+
+        <button class="cf-submit" type="submit">Send Message →</button>
+
+        <p class="cf-note" id="cf-success" style="display:none;">Message sent — I'll get back to you soon.</p>
+        <p class="cf-note cf-error" id="cf-error" style="display:none;">Something went wrong. Try emailing me directly.</p>
+      </form>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .contact-page {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 4rem 1.5rem 6rem;
+  }
+
+  .contact-desc {
+    color: var(--c-muted, #888);
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .cf-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .cf-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--c-muted, #888);
+  }
+
+  .cf-input {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 4px;
+    color: inherit;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.95rem;
+    padding: 0.75rem 1rem;
+    transition: border-color 0.2s;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .cf-input:focus {
+    outline: none;
+    border-color: #00d4aa;
+  }
+
+  .cf-input::placeholder {
+    color: rgba(255,255,255,0.25);
+  }
+
+  .cf-textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .cf-submit {
+    align-self: flex-start;
+    background: #00d4aa;
+    border: none;
+    border-radius: 4px;
+    color: #000;
+    cursor: pointer;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    padding: 0.75rem 1.75rem;
+    transition: opacity 0.2s;
+  }
+
+  .cf-submit:hover {
+    opacity: 0.85;
+  }
+
+  .cf-note {
+    font-size: 0.85rem;
+    color: #00d4aa;
+    margin: 0;
+  }
+
+  .cf-error {
+    color: #ff6b6b;
+  }
+</style>
+
+<script>
+  const form = document.querySelector('.contact-form') as HTMLFormElement;
+  const success = document.getElementById('cf-success');
+  const error = document.getElementById('cf-error');
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { Accept: 'application/json' },
+      });
+
+      if (res.ok) {
+        form.reset();
+        if (success) success.style.display = 'block';
+      } else {
+        if (error) error.style.display = 'block';
+      }
+    } catch {
+      if (error) error.style.display = 'block';
+    }
+  });
+</script>

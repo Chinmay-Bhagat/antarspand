@@ -1,0 +1,39 @@
+---
+interface Props {
+  post: {
+    id: string;
+    data: {
+      title: string;
+      excerpt: string;
+      date: string;
+      dateDisplay: string;
+      readTime: number;
+      category: string;
+      tag: string;
+      featured?: boolean;
+    };
+  };
+  featured?: boolean;
+}
+const { post, featured = false } = Astro.props;
+const { data } = post;
+---
+
+<a
+  href={`/blog/${post.id}`}
+  class={`card ${featured ? 'card-feat' : 'card-bt'}`}
+  data-cat={data.category}
+  role="listitem"
+>
+  <span class={`tag tag-${data.category}`}>{data.tag}</span>
+  <h3 class="card-title">{data.title}</h3>
+  {data.excerpt && <p class="card-body">{data.excerpt}</p>}
+  <footer class="card-meta">
+    {featured && <span>Chinmay Bhagat</span>}
+    {featured && <span class="cdot" aria-hidden="true"></span>}
+    <span>{data.readTime} min read</span>
+    <span class="cdot" aria-hidden="true"></span>
+    <time datetime={data.date}>{data.dateDisplay}</time>
+  </footer>
+  <span class="card-readmore" aria-hidden="true">{featured ? 'Read article →' : 'Read →'}</span>
+</a>

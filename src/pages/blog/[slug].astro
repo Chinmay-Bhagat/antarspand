@@ -1,5 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import RelatedArticles from '../../components/RelatedArticles.astro';
+import ReadingProgress from '../../components/ReadingProgress.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -14,7 +16,6 @@ const { post } = Astro.props;
 const { data } = post;
 const { Content } = await render(post);
 
-// Sorted posts for prev/next navigation
 const allPosts = await getCollection('blog');
 const sorted = allPosts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
 const idx = sorted.findIndex(p => p.id === post.id);
@@ -23,9 +24,9 @@ const next = sorted[idx - 1] ?? null;
 ---
 
 <Layout title={`${data.title} — Chinmay Bhagat`} description={data.excerpt}>
+  <ReadingProgress />
   <main id="main-content">
 
-    <!-- ══ ARTICLE HERO ══ -->
     <div class="art-hero">
       <p class="art-eyebrow">
         <span class="live-dot" aria-hidden="true"></span>
@@ -41,12 +42,16 @@ const next = sorted[idx - 1] ?? null;
       </div>
     </div>
 
-    <!-- ══ ARTICLE BODY ══ -->
     <div class="art-body">
       <Content />
     </div>
 
-    <!-- ══ PREV / NEXT NAV ══ -->
+    <RelatedArticles
+      currentId={post.id}
+      currentCategory={data.category}
+      allPosts={sorted}
+    />
+
     <nav class="art-nav" aria-label="Article navigation">
       {prev ? (
         <a href={`/blog/${prev.id}`} class="art-nav-btn">← {prev.data.title}</a>

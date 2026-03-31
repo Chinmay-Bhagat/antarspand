@@ -1,0 +1,136 @@
+<section class="sec" id="insights" aria-labelledby="insights-heading">
+  <p class="sec-eyebrow" aria-hidden="true">Why Your Health Can't Wait</p>
+  <h2 class="sec-h2" id="insights-heading">What your body is telling you</h2>
+
+  <div class="slider" id="insights-slider" aria-roledescription="carousel" aria-label="Health insights">
+
+    <div class="slider-track" id="slider-track">
+
+      <div class="slide" role="group" aria-roledescription="slide" aria-label="1 of 6">
+        <div class="slide-counter" aria-hidden="true">01 / 06</div>
+        <div class="slide-stat">19.8M</div>
+        <h3 class="slide-title">Heart disease is the #1 cause of death globally — every single year.</h3>
+        <p class="slide-body">19.8 million people die from cardiovascular conditions annually. Most of these conditions are detectable early — the challenge is that the warning signals appear long before any symptoms do.</p>
+        <div class="slide-source">WHO / Global Burden of Disease 2022</div>
+      </div>
+
+      <div class="slide" role="group" aria-roledescription="slide" aria-label="2 of 6">
+        <div class="slide-counter" aria-hidden="true">02 / 06</div>
+        <div class="slide-stat">10+ years</div>
+        <h3 class="slide-title">Heart disease builds quietly for over a decade before you feel anything.</h3>
+        <p class="slide-body">By the time most people receive a diagnosis, the condition has been developing silently for years. Early detection — not just treatment — is what changes outcomes.</p>
+        <div class="slide-source">American Heart Association · ESC Guidelines 2023</div>
+      </div>
+
+      <div class="slide" role="group" aria-roledescription="slide" aria-label="3 of 6">
+        <div class="slide-counter" aria-hidden="true">03 / 06</div>
+        <div class="slide-stat">1 Billion</div>
+        <h3 class="slide-title">Around 1 billion people have sleep apnea. Most don't know it.</h3>
+        <p class="slide-body">Sleep apnea causes brief pauses in breathing during sleep, repeatedly straining your heart through the night. A simple sensor under your mattress can detect it passively — no clinic visit needed.</p>
+        <div class="slide-source">Lancet Respiratory Medicine 2019</div>
+      </div>
+
+      <div class="slide" role="group" aria-roledescription="slide" aria-label="4 of 6">
+        <div class="slide-counter" aria-hidden="true">04 / 06</div>
+        <div class="slide-stat">Days early</div>
+        <h3 class="slide-title">Your heartbeat rhythm changes before you feel sick.</h3>
+        <p class="slide-body">Heart rate variability (HRV) — the slight variation between each heartbeat — reflects how well your body is coping. It drops days before illness, burnout, or a cardiac event, giving you an early window to act.</p>
+        <div class="slide-source">Frontiers in Neuroscience 2020</div>
+      </div>
+
+      <div class="slide" role="group" aria-roledescription="slide" aria-label="5 of 6">
+        <div class="slide-counter" aria-hidden="true">05 / 06</div>
+        <div class="slide-stat">&lt; 5%</div>
+        <h3 class="slide-title">Almost nobody monitors their sleep health — even once.</h3>
+        <p class="slide-body">Yet sleep is when your body repairs itself and your heart works hardest. A single night of data can reveal patterns that a routine checkup would completely miss.</p>
+        <div class="slide-source">Sleep Advisor Global Survey 2024</div>
+      </div>
+
+      <div class="slide" role="group" aria-roledescription="slide" aria-label="6 of 6">
+        <div class="slide-counter" aria-hidden="true">06 / 06</div>
+        <div class="slide-stat">~$0</div>
+        <h3 class="slide-title">Passive nightly monitoring now costs nothing extra.</h3>
+        <p class="slide-body">A hospital sleep study costs $3,000–$5,000 and happens once. A contactless sensor under your mattress tracks your heart rate, breathing, and sleep stages every night — automatically, with no wires or effort.</p>
+        <div class="slide-source">AntarSpand · Clinical cost comparison 2024</div>
+      </div>
+
+    </div>
+
+    <div class="slider-controls">
+      <button class="slider-btn" id="slider-prev" aria-label="Previous insight">←</button>
+      <div class="slider-dots" id="slider-dots" role="tablist" aria-label="Select insight">
+        <button class="sdot on" role="tab" aria-selected="true" aria-label="Insight 1" data-idx="0"></button>
+        <button class="sdot" role="tab" aria-selected="false" aria-label="Insight 2" data-idx="1"></button>
+        <button class="sdot" role="tab" aria-selected="false" aria-label="Insight 3" data-idx="2"></button>
+        <button class="sdot" role="tab" aria-selected="false" aria-label="Insight 4" data-idx="3"></button>
+        <button class="sdot" role="tab" aria-selected="false" aria-label="Insight 5" data-idx="4"></button>
+        <button class="sdot" role="tab" aria-selected="false" aria-label="Insight 6" data-idx="5"></button>
+      </div>
+      <button class="slider-btn" id="slider-next" aria-label="Next insight">→</button>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  'use strict';
+
+  (function () {
+    const track   = document.getElementById('slider-track') as HTMLElement | null;
+    const prev    = document.getElementById('slider-prev') as HTMLButtonElement | null;
+    const next    = document.getElementById('slider-next') as HTMLButtonElement | null;
+    const dotsEl  = document.getElementById('slider-dots');
+    const slider  = document.getElementById('insights-slider');
+    if (!track || !prev || !next || !dotsEl || !slider) return;
+
+    const slides  = track.querySelectorAll('.slide');
+    const dots    = dotsEl.querySelectorAll('.sdot') as NodeListOf<HTMLElement>;
+    const total   = slides.length;
+    let current   = 0;
+    let timer: ReturnType<typeof setInterval>;
+
+    function goTo(idx: number) {
+      slides[current].setAttribute('aria-hidden', 'true');
+      dots[current].classList.remove('on');
+      dots[current].setAttribute('aria-selected', 'false');
+      current = (idx + total) % total;
+      track.style.transform = `translateX(-${current * 100}%)`;
+      slides[current].setAttribute('aria-hidden', 'false');
+      dots[current].classList.add('on');
+      dots[current].setAttribute('aria-selected', 'true');
+      slider.setAttribute('aria-label', `Health insights, slide ${current + 1} of ${total}`);
+    }
+
+    slides.forEach((s, i) => s.setAttribute('aria-hidden', i === 0 ? 'false' : 'true'));
+
+    prev.addEventListener('click', () => { goTo(current - 1); resetTimer(); });
+    next.addEventListener('click', () => { goTo(current + 1); resetTimer(); });
+
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        goTo(Number(dot.dataset.idx));
+        resetTimer();
+      });
+    });
+
+    slider.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft')  { goTo(current - 1); resetTimer(); }
+      if (e.key === 'ArrowRight') { goTo(current + 1); resetTimer(); }
+    });
+
+    function startTimer() {
+      timer = setInterval(() => goTo(current + 1), 6000);
+    }
+    function resetTimer() {
+      clearInterval(timer);
+      startTimer();
+    }
+
+    slider.addEventListener('mouseenter', () => clearInterval(timer));
+    slider.addEventListener('mouseleave', startTimer);
+    slider.addEventListener('focusin',    () => clearInterval(timer));
+    slider.addEventListener('focusout',   startTimer);
+
+    startTimer();
+  })();
+</script>

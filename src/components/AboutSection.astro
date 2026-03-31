@@ -1,0 +1,108 @@
+<section class="sec sec-alt" id="about" aria-labelledby="about-heading">
+  <p class="sec-eyebrow" aria-hidden="true">About the Author</p>
+  <h2 class="sec-h2" id="about-heading" style="margin-bottom:3rem;">The person <em>behind the signal</em></h2>
+
+  <div class="port-wrap rv">
+    <aside class="port-side" aria-label="Author information">
+      <div>
+        <div class="port-avi" aria-label="Initials: C for Chinmay" role="img">C</div>
+        <p class="port-name">Chinmay Bhagat</p>
+        <p class="port-role">Senior Data Scientist</p>
+        <p class="port-org">HealthTech · Bengaluru, India</p>
+      </div>
+      <p class="port-bio">With ~3 years of experience in healthcare and data science, I build the signal processing pipeline behind next-generation contactless sleep monitoring. My work spans the full stack — from raw PVDF sensor physics and BCG/ECG fusion to on-device ML and sleep stage classification. I write here to make the hard parts of health sensor engineering less opaque.</p>
+      <div class="skills-block">
+        <p class="skills-label">Expertise</p>
+        <div class="skills-wrap" role="list">
+          <span class="sk hot" role="listitem">Python</span>
+          <span class="sk hot" role="listitem">PyTorch</span>
+          <span class="sk hot" role="listitem">Signal Processing</span>
+          <span class="sk" role="listitem">NumPy</span>
+          <span class="sk" role="listitem">SciPy</span>
+          <span class="sk" role="listitem">scikit-learn</span>
+          <span class="sk" role="listitem">Machine Learning</span>
+          <span class="sk" role="listitem">Deep Learning</span>
+          <span class="sk" role="listitem">Transformer Models</span>
+          <span class="sk" role="listitem">Fitness Knowledge</span>
+        </div>
+      </div>
+    </aside>
+
+    <div class="port-main">
+      <div class="port-connect-row" id="connect">
+        <div class="port-connect-btns">
+          <a href="mailto:19chinmay01@gmail.com" class="pcbtn pcbtn-primary" aria-label="Send email to Chinmay">
+            <span class="pcbtn-icon" aria-hidden="true">✉</span>
+            <span class="pcbtn-text">
+              <span class="pcbtn-action">Email me</span>
+              <span class="pcbtn-sub">19chinmay01@gmail.com</span>
+            </span>
+          </a>
+          <a href="https://www.linkedin.com/in/chinmaybhagat19" target="_blank" rel="noopener noreferrer" class="pcbtn" aria-label="Connect on LinkedIn">
+            <span class="pcbtn-icon" aria-hidden="true">in</span>
+            <span class="pcbtn-text">
+              <span class="pcbtn-action">Connect on LinkedIn</span>
+              <span class="pcbtn-sub">Let's talk signal engineering</span>
+            </span>
+          </a>
+        </div>
+      </div>
+
+      <ol class="proj-list" aria-label="Featured projects" style="list-style:none;">
+        <li class="proj-item">
+          <span class="proj-num" aria-hidden="true">01</span>
+          <div>
+            <h3 class="proj-title">ECG–BCG Synchronization Pipeline</h3>
+            <p class="proj-desc">Full-stack system aligning Polar H10 ECG with BCG (PVDF Sensor). R peaks detected via SciPy's signal module; BCG J peaks extracted and filtered using z-score based thresholding to retain only high-confidence peaks. Cross-correlation between R and J peaks computes per-beat alignment. R-to-J peak matching with ±50ms delay handling and drift logging.</p>
+            <ul class="proj-stack" style="list-style:none;"><li class="ps">Python</li><li class="ps">NumPy/SciPy</li><li class="ps">asyncio/BLE</li><li class="ps">Polar H10</li><li class="ps">PVDF</li></ul>
+          </div>
+        </li>
+        <li class="proj-item">
+          <span class="proj-num" aria-hidden="true">02</span>
+          <div>
+            <h3 class="proj-title">Contactless Vitals Stack</h3>
+            <p class="proj-desc">End-to-end pipeline extracting heart rate and respiratory rate from raw PVDF BCG signals — no contact, no wearable. Bandpass filtering, peak detection, and RR interval analysis to deliver continuous vitals from an under-mattress sensor.</p>
+            <ul class="proj-stack" style="list-style:none;"><li class="ps">Python</li><li class="ps">SciPy</li><li class="ps">PVDF</li><li class="ps">BCG</li></ul>
+          </div>
+        </li>
+        <li class="proj-item">
+          <span class="proj-num" aria-hidden="true">03</span>
+          <div>
+            <h3 class="proj-title">Snoring Detection via BCG</h3>
+            <p class="proj-desc">Vibration-based snoring classifier using under-mattress PVDF sensor — no microphone required. Frequency-domain analysis of BCG signal to distinguish snoring events from movement artifacts and normal breathing patterns.</p>
+            <ul class="proj-stack" style="list-style:none;"><li class="ps">Python</li><li class="ps">SciPy</li><li class="ps">scikit-learn</li><li class="ps">PVDF</li></ul>
+          </div>
+        </li>
+        <li class="proj-item">
+          <span class="proj-num" aria-hidden="true">04</span>
+          <div>
+            <h3 class="proj-title">Multi-Sensor Signal Processing</h3>
+            <p class="proj-desc">Evaluated and extracted meaningful insights from diverse sensor modalities — contactless vitals (HR, respiration) from PVDF, bed occupancy and posture detection from custom capacitive sensors. Demonstrates the ability to adapt signal processing and data science techniques to any sensor to unlock actionable health insights.</p>
+            <ul class="proj-stack" style="list-style:none;"><li class="ps">PVDF</li><li class="ps">Capacitive Sensors</li><li class="ps">Signal Processing</li><li class="ps">Python</li><li class="ps">scikit-learn</li></ul>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<script>
+  'use strict';
+  const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!REDUCED) {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const siblings = [...(e.target.parentNode as Element).children].filter(c => c.classList.contains('rv'));
+          const idx = siblings.indexOf(e.target as Element);
+          setTimeout(() => e.target.classList.add('in'), idx * 80);
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.rv').forEach(el => io.observe(el));
+  } else {
+    document.querySelectorAll('.rv').forEach(el => el.classList.add('in'));
+  }
+</script>

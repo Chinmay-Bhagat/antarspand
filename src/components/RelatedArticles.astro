@@ -1,0 +1,41 @@
+---
+interface Props {
+  currentId: string;
+  currentCategory: string;
+  allPosts: any[];
+}
+const { currentId, currentCategory, allPosts } = Astro.props;
+
+// Prefer same-category articles, fill with recent posts if needed
+const sameCategory = allPosts
+  .filter(p => p.id !== currentId && p.data.category === currentCategory)
+  .slice(0, 3);
+
+const related = sameCategory.length >= 2
+  ? sameCategory
+  : [
+      ...sameCategory,
+      ...allPosts
+        .filter(p => p.id !== currentId && !sameCategory.find(r => r.id === p.id))
+        .slice(0, 3 - sameCategory.length),
+    ];
+---
+
+{related.length > 0 && (
+  <section class="related-sec">
+    <p class="sec-eyebrow" aria-hidden="true">Keep reading</p>
+    <h2 class="related-heading">Related articles</h2>
+    <div class="related-grid">
+      {related.map((post) => (
+        <a href={`/blog/${post.id}`} class="related-card">
+          <span class={`tag tag-${post.data.category}`}>{post.data.tag}</span>
+          <h3 class="related-title">{post.data.title}</h3>
+          <p class="related-excerpt">{post.data.excerpt}</p>
+          <footer class="card-meta">
+            <span>{post.data.readTime} min read</span>
+          </footer>
+        </a>
+      ))}
+    </div>
+  </section>
+)}
