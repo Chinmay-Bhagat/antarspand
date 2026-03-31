@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 240" width="640" height="240">
+  <defs>
+    <filter id="glow-b">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="640" height="240" fill="#080910" rx="10"/>
+
+  <!-- Baseline grid -->
+  <line x1="55" y1="150" x2="590" y2="150" stroke="#1a1d2e" stroke-width="1"/>
+
+  <!-- BCG waveform (adapted from rj-interval.svg, shifted down by ~20px and stretched) -->
+  <path d="M 55,150
+           L 155,150
+           C 162,150 170,128 180,126
+           C 190,124 198,150 208,150
+           C 213,150 216,176 221,184
+           C 228,192 240,52 250,48
+           C 260,44 270,188 282,192
+           C 289,194 296,150 310,150
+           C 318,150 326,124 338,126
+           C 348,128 354,150 364,150
+           C 368,150 374,166 380,171
+           C 386,175 394,130 404,132
+           C 412,134 422,150 434,150
+           L 585,150"
+    fill="none" stroke="#00dfa0" stroke-width="2.5"
+    stroke-linecap="round" stroke-linejoin="round"
+    filter="url(#glow-b)"/>
+
+  <!-- H label -->
+  <line x1="180" y1="116" x2="180" y2="125" stroke="#b8beca" stroke-width="1" stroke-dasharray="2,2" opacity="0.4"/>
+  <text x="180" y="110" fill="#b8beca" font-family="IBM Plex Mono,monospace" font-size="13" text-anchor="middle">H</text>
+
+  <!-- I label -->
+  <line x1="221" y1="196" x2="221" y2="185" stroke="#b8beca" stroke-width="1" stroke-dasharray="2,2" opacity="0.4"/>
+  <text x="221" y="210" fill="#b8beca" font-family="IBM Plex Mono,monospace" font-size="13" text-anchor="middle">I</text>
+
+  <!-- J label (highlighted teal — main peak) -->
+  <line x1="250" y1="36" x2="250" y2="46" stroke="#00dfa0" stroke-width="1" stroke-dasharray="2,2" opacity="0.6"/>
+  <text x="250" y="30" fill="#00dfa0" font-family="IBM Plex Mono,monospace" font-size="16" text-anchor="middle" font-weight="700">J</text>
+
+  <!-- K label -->
+  <line x1="282" y1="200" x2="282" y2="192" stroke="#b8beca" stroke-width="1" stroke-dasharray="2,2" opacity="0.4"/>
+  <text x="282" y="214" fill="#b8beca" font-family="IBM Plex Mono,monospace" font-size="13" text-anchor="middle">K</text>
+
+  <!-- L label -->
+  <line x1="338" y1="116" x2="338" y2="125" stroke="#b8beca" stroke-width="1" stroke-dasharray="2,2" opacity="0.4"/>
+  <text x="338" y="110" fill="#b8beca" font-family="IBM Plex Mono,monospace" font-size="13" text-anchor="middle">L</text>
+
+  <!-- M label -->
+  <line x1="404" y1="122" x2="404" y2="131" stroke="#b8beca" stroke-width="1" stroke-dasharray="2,2" opacity="0.3"/>
+  <text x="404" y="116" fill="#b8beca" font-family="IBM Plex Mono,monospace" font-size="12" text-anchor="middle" opacity="0.6">M</text>
+
+  <!-- Phase descriptions -->
+  <text x="180" y="232" fill="#4a5568" font-family="IBM Plex Mono,monospace" font-size="9" text-anchor="middle">isovol. contraction</text>
+  <text x="250" y="232" fill="#00dfa0" font-family="IBM Plex Mono,monospace" font-size="9" text-anchor="middle" opacity="0.6">systolic ejection</text>
+  <text x="338" y="232" fill="#4a5568" font-family="IBM Plex Mono,monospace" font-size="9" text-anchor="middle">early diastole</text>
+
+  <!-- BCG section label -->
+  <text x="57" y="145" fill="#7c8494" font-family="IBM Plex Mono,monospace" font-size="11">BCG</text>
+</svg>

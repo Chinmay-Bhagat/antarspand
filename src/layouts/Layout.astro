@@ -75,7 +75,6 @@ const {
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
   <div id="cur" aria-hidden="true"></div>
-  <div id="cur-r" aria-hidden="true"></div>
 
   <header role="banner">
     <a href="/" class="brand" aria-label="AntarSpand — home">
@@ -126,37 +125,26 @@ const {
 
     /* ── Custom Cursor ─────────────────────────────── */
     if (!REDUCED) (function () {
-      const cur  = document.getElementById('cur');
-      const curR = document.getElementById('cur-r');
-      if (!cur || !curR) return;
-      let mx = -300, my = -300, rx = -300, ry = -300, ready = false;
+      const cur = document.getElementById('cur');
+      if (!cur) return;
+      let mx = -300, my = -300, ready = false;
       document.addEventListener('mousemove', e => {
         mx = e.clientX; my = e.clientY;
         if (!ready) {
-          ready = true; rx = mx; ry = my;
-          cur.style.display = curR.style.display = 'block';
+          ready = true;
+          cur.style.display = 'block';
           document.body.style.cursor = 'none';
         }
       }, { passive: true });
-      document.addEventListener('mouseleave', () => { cur.style.opacity = curR.style.opacity = '0'; });
-      document.addEventListener('mouseenter', () => { cur.style.opacity = curR.style.opacity = '1'; });
+      document.addEventListener('mouseleave', () => { cur.style.opacity = '0'; });
+      document.addEventListener('mouseenter', () => { cur.style.opacity = '1'; });
       (function loop() {
-        cur.style.left  = mx + 'px'; cur.style.top  = my + 'px';
-        rx += (mx - rx) * .10; ry += (my - ry) * .10;
-        curR.style.left = rx + 'px'; curR.style.top = ry + 'px';
+        cur.style.left = mx + 'px'; cur.style.top = my + 'px';
         requestAnimationFrame(loop);
       })();
       document.querySelectorAll('button, a, .card, .fpill').forEach(el => {
-        el.addEventListener('mouseenter', () => {
-          cur.style.width = cur.style.height = '14px';
-          curR.style.width = curR.style.height = '44px';
-          curR.style.borderColor = 'rgba(0,223,160,.8)';
-        });
-        el.addEventListener('mouseleave', () => {
-          cur.style.width = cur.style.height = '8px';
-          curR.style.width = curR.style.height = '34px';
-          curR.style.borderColor = 'rgba(0,223,160,.55)';
-        });
+        el.addEventListener('mouseenter', () => { cur.style.width = cur.style.height = '14px'; });
+        el.addEventListener('mouseleave', () => { cur.style.width = cur.style.height = '8px'; });
       });
     })();
   </script>
