@@ -7,6 +7,9 @@ const {
   title = 'The body speaks in waves — Chinmay Bhagat · Biosignal Engineering',
   description = 'Deep dives into BCG signal processing, sleep-stage AI, sensor design, and the engineering behind contactless health monitoring.',
 } = Astro.props;
+
+const cleanPath = Astro.url.pathname.replace(/\/index\.html$/, '/').replace(/\.html$/, '').replace(/\/$/, '') || '/';
+const canonicalURL = new URL(cleanPath, Astro.site ?? 'https://antarspand.com').href;
 ---
 
 <!doctype html>
@@ -29,7 +32,7 @@ const {
   <meta property="og:image" content="https://antarspand.com/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:url" content={new URL(Astro.url.pathname, 'https://antarspand.com').href} />
+  <meta property="og:url" content={canonicalURL} />
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={title} />
@@ -45,7 +48,7 @@ const {
   />
 
   <!-- Canonical URL -->
-  <link rel="canonical" href={new URL(Astro.url.pathname, 'https://antarspand.com').href} />
+  <link rel="canonical" href={canonicalURL} />
 
   <!-- JSON-LD: Person + WebSite -->
   <script type="application/ld+json" set:html={JSON.stringify({
