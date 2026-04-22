@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 300" width="640" height="300">
+  <defs>
+    <filter id="glow-t">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="640" height="300" fill="#080910" rx="10"/>
+
+  <!-- Title: centered, larger, breathing room above chart -->
+  <text x="320" y="34" fill="#b8beca" font-family="IBM Plex Mono,monospace" font-size="14" text-anchor="middle" font-weight="500">Nighttime skin temperature across the menstrual cycle</text>
+
+  <!-- Chart content, pushed down to leave space below title -->
+  <g transform="translate(0, 40)">
+
+    <!-- Baseline (follicular temperature reference) -->
+    <line x1="55" y1="152" x2="590" y2="152" stroke="#1a1d2e" stroke-width="1" stroke-dasharray="4,4"/>
+
+    <!-- Ovulation marker vertical line -->
+    <line x1="318" y1="45" x2="318" y2="215" stroke="#1a1d2e" stroke-width="1" stroke-dasharray="2,3"/>
+
+    <!-- Temperature curve -->
+    <path d="M 60,152
+             L 135,152
+             C 180,151 220,151 260,152
+             C 275,153 282,157 290,156
+             C 305,148 315,125 325,118
+             C 355,108 400,103 470,102
+             C 510,103 535,112 575,148"
+      fill="none" stroke="#00dfa0" stroke-width="2.5"
+      stroke-linecap="round" stroke-linejoin="round"
+      filter="url(#glow-t)"/>
+
+    <!-- Ovulation callout (above curve) -->
+    <text x="318" y="36" fill="#00dfa0" font-family="IBM Plex Mono,monospace" font-size="13" text-anchor="middle" font-weight="700">Ovulation</text>
+
+    <!-- Phase labels (under the chart) -->
+    <text x="95" y="235" fill="#7c8494" font-family="IBM Plex Mono,monospace" font-size="11" text-anchor="middle">Menstruation</text>
+    <text x="215" y="235" fill="#7c8494" font-family="IBM Plex Mono,monospace" font-size="11" text-anchor="middle">Follicular (cool)</text>
+    <text x="460" y="235" fill="#00dfa0" font-family="IBM Plex Mono,monospace" font-size="11" text-anchor="middle" opacity="0.9">Luteal (warm)</text>
+
+    <!-- Temperature shift annotation -->
+    <text x="575" y="96" fill="#4a5568" font-family="IBM Plex Mono,monospace" font-size="10" text-anchor="end">+0.3–0.5 °C</text>
+
+    <!-- Day markers -->
+    <text x="60" y="254" fill="#4a5568" font-family="IBM Plex Mono,monospace" font-size="9" text-anchor="start">Day 1</text>
+    <text x="318" y="254" fill="#4a5568" font-family="IBM Plex Mono,monospace" font-size="9" text-anchor="middle">Day 14</text>
+    <text x="580" y="254" fill="#4a5568" font-family="IBM Plex Mono,monospace" font-size="9" text-anchor="end">Day 28</text>
+
+  </g>
+</svg>
