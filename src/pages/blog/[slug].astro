@@ -24,6 +24,19 @@ const next = sorted[idx - 1] ?? null;
 ---
 
 <Layout title={`${data.title} — Chinmay Bhagat`} description={data.excerpt}>
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": data.title,
+    "description": data.excerpt,
+    "datePublished": data.date,
+    "author": { "@id": "https://antarspand.com/#chinmay" },
+    "publisher": { "@id": "https://antarspand.com/#chinmay" },
+    "mainEntityOfPage": `https://antarspand.com/blog/${post.id}`,
+    "image": "https://antarspand.com/og-image.png",
+    "wordCount": Math.round(data.readTime * 230),
+    "keywords": [data.tag]
+  })} />
   <ReadingProgress />
   <main id="main-content">
 
