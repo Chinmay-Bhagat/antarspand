@@ -5,7 +5,7 @@ date: "2025-11-01"
 dateDisplay: "Nov 2025"
 readTime: 9
 category: bcg
-tag: "BCG / HRV"
+tag: "BCG"
 featured: false
 ---
 

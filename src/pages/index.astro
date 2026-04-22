@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import InsightsSlider from '../components/InsightsSlider.astro';
 import ArticleGrid from '../components/ArticleGrid.astro';
-import AboutSection from '../components/AboutSection.astro';
+import ConnectStrip from '../components/ConnectStrip.astro';
 import { getCollection } from 'astro:content';
 
 const allPosts = await getCollection('blog');
@@ -18,6 +18,6 @@ const latestPostUrl = `/blog/${posts[0].id}`;
     <Hero latestPostUrl={latestPostUrl} />
     <InsightsSlider />
     <ArticleGrid posts={rest} featured={featured} />
-    <AboutSection />
+    <ConnectStrip />
   </main>
 </Layout>

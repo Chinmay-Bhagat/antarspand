@@ -10,6 +10,7 @@ const {
 
 const cleanPath = Astro.url.pathname.replace(/\/index\.html$/, '/').replace(/\.html$/, '').replace(/\/$/, '') || '/';
 const canonicalURL = new URL(cleanPath, Astro.site ?? 'https://antarspand.com').href;
+const isArticle = Astro.url.pathname.startsWith('/blog/');
 ---
 
 <!doctype html>
@@ -25,7 +26,7 @@ const canonicalURL = new URL(cleanPath, Astro.site ?? 'https://antarspand.com').
   <link rel="icon" href="/favicon.ico" sizes="any" />
 
   <!-- OpenGraph -->
-  <meta property="og:type" content="website" />
+  <meta property="og:type" content={isArticle ? 'article' : 'website'} />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
   <meta property="og:site_name" content="The body speaks in waves" />

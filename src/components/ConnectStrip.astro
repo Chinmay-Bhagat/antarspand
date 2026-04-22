@@ -1,0 +1,44 @@
+---
+---
+
+<section class="connect-strip" id="connect" aria-label="Connect">
+  <div class="connect-btns">
+    <a href="https://www.linkedin.com/in/chinmaybhagat19" target="_blank" rel="noopener noreferrer" class="pcbtn" aria-label="Connect on LinkedIn">
+      <span class="pcbtn-icon" aria-hidden="true">in</span>
+      <span class="pcbtn-text">
+        <span class="pcbtn-action">Connect on LinkedIn</span>
+        <span class="pcbtn-sub">Let's talk signal engineering</span>
+      </span>
+    </a>
+    <a href="/contact" class="pcbtn" aria-label="Get in touch">
+      <span class="pcbtn-icon" aria-hidden="true">→</span>
+      <span class="pcbtn-text">
+        <span class="pcbtn-action">Get in touch</span>
+        <span class="pcbtn-sub">Send a message</span>
+      </span>
+    </a>
+  </div>
+</section>
+
+<style>
+  .connect-strip {
+    border-top: 1px solid var(--bdr);
+  }
+
+  .connect-btns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .connect-btns .pcbtn:first-child {
+    border-right: 1px solid var(--bdr);
+  }
+
+  @media (max-width: 768px) {
+    .connect-btns { grid-template-columns: 1fr; }
+    .connect-btns .pcbtn:first-child {
+      border-right: none;
+      border-bottom: 1px solid var(--bdr);
+    }
+  }
+</style>
