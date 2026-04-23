@@ -3,7 +3,7 @@ title: "Listening to Women's Health"
 excerpt: "For most of a woman's life, the signals that matter most to her health move too slowly for a doctor's visit and too quickly for an annual panel. Wearables sit in the middle — and that is where the interesting data lives."
 date: "2026-04-20"
 dateDisplay: "Apr 2026"
-readTime: 11
+readTime: 14
 category: hc
 tag: "HealthTech"
 featured: true
@@ -13,12 +13,7 @@ featured: true
 
 Most women already feel the rhythm. A week where sleep comes easily. A week where focus sharpens. A week where the body feels quieter. A week where everything seems turned up. These shifts aren't imagined, and they aren't a flaw in an otherwise steady baseline. They *are* the baseline.
 
-The female body moves through layered cycles — circadian, monthly, reproductive, lifetime — and each one reshapes the physiology underneath.
-
-- **Circadian** — the 24-hour cycle. Body temperature, stress hormones, sleep chemistry, and alertness rise and fall in a predictable daily pattern.
-- **Monthly** — around 28 days. Estrogen and progesterone rise and fall in sequence, reshaping sleep, temperature, mood, and the body's stress response from one week to the next.
-- **Reproductive** — a timescale of decades. From the first period through fertile years, pregnancy, and perimenopause, each phase of life changes what a healthy baseline even looks like.
-- **Lifetime** — slower still. Gradual shifts in the heart, blood vessels, metabolism, and bone that unfold across a woman's life.
+The female body moves through layered cycles — circadian (24Hr cycle), monthly, reproductive, lifetime — and each one reshapes the physiology underneath.
 
 A blood test captures one moment. An annual check-up captures maybe twelve moments across a decade. Neither matches the timescale on which a woman's body actually works, which is why so much of what women have always known about their own bodies has lived outside the medical record.
 
@@ -75,17 +70,27 @@ The honest framing: wearables aren't diagnosing anything. They're producing rich
 
 ## Beyond the cycle
 
-The same four signals carry meaningful information about conditions well beyond the cycle itself.
+The same four signals carry meaningful information well beyond reproduction itself. The underlying reason is simple: heart rate, thermoregulation, and nervous-system balance respond to hormones, illness, training load, and systemic stress using the same vocabulary. The cycle signature is one dialect of a broader language, and once you know how to read it, the other dialects start to make sense too.
 
-**Pregnancy.** Sustained temperature elevation, resting heart rate up 6–10 bpm, HRV lower, respiratory rate up 1–2 breaths per minute. The pattern is specific enough that several wearables now flag likely early pregnancy before the user would otherwise test.
+### Pregnancy
 
-**Perimenopause.** The two-phase temperature pattern breaks down, night-to-night variability goes up, HRV declines, and sleep fragmentation worsens. The transition often takes years, and a wearable can trace it continuously in a way point-in-time hormone panels can't.
+Pregnancy produces what may be the clearest signature a wearable can pick up. A 2025 large-scale analysis of more than 10,000 pregnancies tracked with the Oura Ring ([*JMIR mHealth and uHealth*](https://pmc.ncbi.nlm.nih.gov/articles/PMC12603580/)) mapped the physiological trajectory from conception through postpartum. Skin temperature began rising by gestational week 4 and reached about +0.3 °C above baseline by week 9. Resting heart rate lifted by roughly 4 bpm by week 5 and climbed steadily to more than +10 bpm by week 32. HRV mirrored the opposite path, falling more than 15 ms below baseline by mid-pregnancy. Respiratory rate rose by about one breath per minute, peaking around weeks 8–9.
 
-**PCOS and cycles without ovulation.** A flattened or missing luteal temperature shift. Irregular or absent heart-rate elevation. A wearable can't diagnose PCOS, but it can show that the usual luteal signature is missing — which is useful information to bring to a gynaecologist.
+The practical consequence: temperature moves first, and it moves earliest. That is why several wearables now flag likely early pregnancy days before a home test would — not by detecting hCG, but by noticing that the luteal-phase temperature elevation hasn't come down when it should.
 
-**Thyroid problems.** Persistently elevated or suppressed resting heart rate, often outside the normal cycle pattern. Not a thyroid test, but a hint that something systemic is off and worth investigating.
+### Perimenopause
 
-**Autoimmune flares.** Often preceded by a three- to five-day window of elevated resting heart rate and reduced HRV. Some women learn to recognise their own personal early-warning pattern this way.
+Perimenopause unfolds across years, which is exactly the timescale a wearable is suited to. The two-phase temperature pattern breaks down as ovulation becomes irregular. Night-to-night variability rises. Hot flashes introduce sharp nocturnal temperature and heart-rate spikes that weren't there before. HRV tends to decline, and sleep fragmentation worsens.
+
+A 2025 scoping review ([*Decoding female physiology*](https://www.medrxiv.org/content/10.1101/2025.09.24.25336575v1.full)) synthesised 36 studies on digital health tools across the menstrual cycle, perimenopause, and menopause, and the picture that emerges is that point-in-time hormone panels miss most of what a wearable sees continuously. Laboratory work cited in that review reports body-temperature excursions of roughly 1.1 °C during perimenopausal hot flashes — large enough that continuous skin temperature from a wrist or finger can trace them in sleep. The algorithms for automatic hot-flash detection are still early, but the direction is clear.
+
+### Conditions beyond reproduction
+
+**PCOS and anovulatory cycles.** In women with polycystic ovary syndrome, the luteal temperature shift is often delayed, blunted, or missing entirely — the signature of ovulation simply isn't there. Research comparing continuous wrist skin temperature against traditional basal body temperature ([Zhu et al., *Journal of Medical Internet Research*, 2021](https://pmc.ncbi.nlm.nih.gov/articles/PMC8238491/)) found that wrist readings detected ovulation with markedly higher sensitivity than BBT did (0.62 vs 0.23). A wearable can't diagnose PCOS, but it can show that the usual luteal signature is missing — which is useful information to bring to a gynaecologist.
+
+**Thyroid problems.** Thyroid hormone has a direct chronotropic effect — too much pushes heart rate up, too little slows it down. Two wearable-based studies show how clearly this comes through in day-to-day tracking. A 2018 study in [*JMIR mHealth and uHealth*](https://mhealth.jmir.org/2018/7/e159/) found that resting heart rate from a wearable tracker reliably followed the course of thyrotoxicosis treatment. A 2021 study in [*Endocrinology and Metabolism*](https://pmc.ncbi.nlm.nih.gov/articles/PMC8566120/) showed the inverse for hypothyroidism — wearable-derived heart rate predicted thyroid function, and even free T4 levels in well-controlled patients. Wearable data isn't a thyroid test, but persistent, unexplained shifts in resting heart rate are a hint worth investigating.
+
+**Autoimmune flares.** The clearest recent evidence comes from rheumatoid arthritis. A 2025 study in [*Scientific Reports*](https://www.nature.com/articles/s41598-025-29748-y) equipped people with RA with an Apple Watch, Fitbit, or Oura Ring and tracked them through flares and remissions. Daily heart rate and resting heart rate were consistently elevated during flare periods compared to remission, and circadian features of HRV distinguished the two states. Strikingly, these physiological shifts were detectable up to **four weeks before** flares became clinically apparent — long enough that some people with RA now use their own wearable trends as an early-warning system to pace the week before symptoms arrive.
 
 ## What wearables still can't see
 
