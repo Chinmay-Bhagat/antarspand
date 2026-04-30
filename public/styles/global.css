@@ -280,6 +280,7 @@ nav a:hover { color: var(--sig); }
 .t-normal { color: var(--txt); }
 .t-italic { font-style: italic; font-weight: 300; color: var(--sig); }
 .t-dim { color: var(--mute); }
+.t-sig { color: var(--sig); }
 
 @keyframes slideUp { to { transform: translateY(0); } }
 @keyframes fadeUp {
@@ -417,7 +418,7 @@ nav a:hover { color: var(--sig); }
 
 .ag {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 1px;
   background: var(--bdr);
 }
@@ -443,8 +444,25 @@ nav a:hover { color: var(--sig); }
 }
 .card:hover::after { transform: scaleX(1); }
 
-.card-feat { grid-column: 1/3; background: var(--sur); padding: 3rem; }
+.card-feat {
+  grid-column: 1/-1;
+  background: var(--sur);
+  padding: 3rem;
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
 .card-feat::after { height: 3px; }
+.card-feat .card-text { flex: 1; min-width: 0; }
+.card-feat .card-title { font-size: 2.4rem; font-weight: 700; }
+.card-feat .card-body { font-size: 1.33rem; }
+.card-cover {
+  flex-shrink: 0;
+  width: auto;
+  height: auto;
+  max-height: 420px;
+  max-width: 50%;
+}
 .card-bt { border-top: 1px solid var(--bdr); }
 .card[aria-hidden="true"] { display: none; }
 
@@ -466,14 +484,13 @@ nav a:hover { color: var(--sig); }
 .tag-ml  { color: var(--plum); border-color: rgba(168,111,255,.28); background: rgba(168,111,255,.07); }
 
 .card-title {
-  font-family: 'Fraunces', serif;
-  font-weight: 700;
-  letter-spacing: -.02em;
-  line-height: 1.15;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 1.62rem;
+  letter-spacing: -.015em;
+  line-height: 1.2;
   margin-bottom: .75rem;
 }
-.card-feat .card-title { font-size: clamp(1.3rem, 2.5vw, 2.4rem); }
-.card:not(.card-feat) .card-title { font-size: 1.02rem; }
 
 .card-body {
   font-size: var(--fs-body-sm);
@@ -517,6 +534,19 @@ nav a:hover { color: var(--sig); }
   padding: calc(80px + 3rem) 3.5rem 4rem;
   border-bottom: 1px solid var(--bdr);
   background: var(--sur);
+}
+.art-hero-split {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+.art-hero-split .art-hero-text { flex: 1; min-width: 0; }
+.art-cover {
+  flex-shrink: 0;
+  width: auto;
+  height: auto;
+  max-height: 280px;
+  max-width: 32%;
 }
 .art-eyebrow {
   font-family: 'IBM Plex Mono', monospace;
@@ -567,9 +597,9 @@ nav a:hover { color: var(--sig); }
   margin: 2rem 0 .75rem;
 }
 .art-body p {
-  font-size: var(--fs-body);
-  line-height: 1.82;
-  color: var(--sub);
+  font-size: 1.1rem;
+  line-height: 1.78;
+  color: var(--txt);
   margin-bottom: 1.4rem;
 }
 .art-body strong { color: var(--txt); font-weight: 400; }
@@ -583,7 +613,7 @@ nav a:hover { color: var(--sig); }
   color: var(--sig);
 }
 .art-body ul { margin-bottom: 1.4rem; padding-left: 1.5rem; }
-.art-body li { font-size: var(--fs-body); line-height: 1.75; color: var(--sub); margin-bottom: .5rem; }
+.art-body li { font-size: 1.1rem; line-height: 1.72; color: var(--txt); margin-bottom: .5rem; }
 .art-body img {
   max-width: 100%;
   height: auto;
@@ -762,7 +792,7 @@ footer {
 }
 
 .slide-stat {
-  font-family: 'Fraunces', serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: clamp(2.8rem, 8vw, 4.5rem);
   font-weight: 900;
   color: var(--sig);
@@ -771,7 +801,7 @@ footer {
 }
 
 .slide-title {
-  font-family: 'Fraunces', serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: clamp(1.1rem, 2.5vw, 1.4rem);
   font-weight: 700;
   color: var(--txt);
@@ -894,14 +924,17 @@ footer {
   .hero-inner { padding: 0 1.25rem 3rem; }
   .sec { padding: 4rem 1.25rem; }
   .ag { grid-template-columns: 1fr; }
-  .card-feat { grid-column: 1; padding: 2rem; }
+  .card-feat { grid-column: 1; padding: 2rem; flex-direction: column; align-items: stretch; gap: 1.5rem; }
+  .card-feat .card-cover { max-width: 100%; order: -1; }
 
   .art-body { padding: 0 1.25rem; }
   .art-hero { padding: calc(60px + 2.5rem) 1.25rem 3rem; }
+  .art-hero-split { flex-direction: column; align-items: stretch; gap: 1.5rem; }
+  .art-cover { max-width: 100%; order: -1; align-self: center; }
   .art-nav { padding: 2rem 1.25rem; }
 
   .slide { padding: 2rem 1.5rem 1.8rem; flex-direction: column; gap: 1.5rem; }
-  .slide-chart { width: 100%; justify-content: flex-start; }
+  .slide-chart { width: 180px; justify-content: flex-start; }
   .slider-controls { gap: .6rem; }
 
   footer { padding: 2rem 1.25rem; text-align: center; flex-direction: column; align-items: center; }

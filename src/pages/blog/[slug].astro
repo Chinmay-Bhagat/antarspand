@@ -32,7 +32,7 @@ const next = sorted[idx - 1] ?? null;
 ---
 
 <Layout title={`${data.title} — Chinmay Bhagat`} description={data.excerpt}>
-  <script type="application/ld+json" set:html={JSON.stringify({
+  <script is:inline type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     "headline": data.title,
@@ -48,19 +48,22 @@ const next = sorted[idx - 1] ?? null;
   <ReadingProgress />
   <main id="main-content">
 
-    <div class="art-hero">
-      <p class="art-eyebrow">
-        <span class="live-dot" aria-hidden="true"></span>
-        <span class={`tag tag-${data.category}`}>{data.tag}</span>
-      </p>
-      <h1 class="art-title">{data.title}</h1>
-      <div class="art-meta">
-        <span>Chinmay Bhagat</span>
-        <span class="cdot" aria-hidden="true"></span>
-        <span>{data.readTime} min read</span>
-        <span class="cdot" aria-hidden="true"></span>
-        <time datetime={data.date}>{data.dateDisplay}</time>
+    <div class={`art-hero ${data.cover ? 'art-hero-split' : ''}`}>
+      <div class="art-hero-text">
+        <p class="art-eyebrow">
+          <span class="live-dot" aria-hidden="true"></span>
+          <span class={`tag tag-${data.category}`}>{data.tag}</span>
+        </p>
+        <h1 class="art-title">{data.title}</h1>
+        <div class="art-meta">
+          <span>Chinmay Bhagat</span>
+          <span class="cdot" aria-hidden="true"></span>
+          <span>{data.readTime} min read</span>
+          <span class="cdot" aria-hidden="true"></span>
+          <time datetime={data.date}>{data.dateDisplay}</time>
+        </div>
       </div>
+      {data.cover && <img src={data.cover} alt={`Illustration for ${data.title}`} class="art-cover" loading="eager" />}
     </div>
 
     <div class="art-body">

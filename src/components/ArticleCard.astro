@@ -4,6 +4,8 @@ interface Props {
     id: string;
     data: {
       title: string;
+      titleAccent?: string;
+      cover?: string;
       excerpt: string;
       date: string;
       dateDisplay: string;
@@ -17,6 +19,9 @@ interface Props {
 }
 const { post, featured = false } = Astro.props;
 const { data } = post;
+const titleHtml = data.titleAccent
+  ? data.title.replace(data.titleAccent, `<span class="t-sig">${data.titleAccent}</span>`)
+  : data.title;
 ---
 
 <a
@@ -25,15 +30,34 @@ const { data } = post;
   data-cat={data.category}
   role="listitem"
 >
-  <span class={`tag tag-${data.category}`}>{data.tag}</span>
-  <h3 class="card-title">{data.title}</h3>
-  {data.excerpt && <p class="card-body">{data.excerpt}</p>}
-  <footer class="card-meta">
-    {featured && <span>Chinmay Bhagat</span>}
-    {featured && <span class="cdot" aria-hidden="true"></span>}
-    <span>{data.readTime} min read</span>
-    <span class="cdot" aria-hidden="true"></span>
-    <time datetime={data.date}>{data.dateDisplay}</time>
-  </footer>
-  <span class="card-readmore" aria-hidden="true">{featured ? 'Read article →' : 'Read →'}</span>
+  {featured ? (
+    <>
+      <div class="card-text">
+        <span class={`tag tag-${data.category}`}>{data.tag}</span>
+        <h3 class="card-title" set:html={titleHtml}></h3>
+        {data.excerpt && <p class="card-body">{data.excerpt}</p>}
+        <footer class="card-meta">
+          <span>Chinmay Bhagat</span>
+          <span class="cdot" aria-hidden="true"></span>
+          <span>{data.readTime} min read</span>
+          <span class="cdot" aria-hidden="true"></span>
+          <time datetime={data.date}>{data.dateDisplay}</time>
+        </footer>
+        <span class="card-readmore" aria-hidden="true">Read article →</span>
+      </div>
+      {data.cover && <img src={data.cover} alt={`Illustration for ${data.title}`} class="card-cover" loading="eager" />}
+    </>
+  ) : (
+    <>
+      <span class={`tag tag-${data.category}`}>{data.tag}</span>
+      <h3 class="card-title" set:html={titleHtml}></h3>
+      {data.excerpt && <p class="card-body">{data.excerpt}</p>}
+      <footer class="card-meta">
+        <span>{data.readTime} min read</span>
+        <span class="cdot" aria-hidden="true"></span>
+        <time datetime={data.date}>{data.dateDisplay}</time>
+      </footer>
+      <span class="card-readmore" aria-hidden="true">Read →</span>
+    </>
+  )}
 </a>

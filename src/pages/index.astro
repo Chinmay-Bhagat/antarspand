@@ -9,7 +9,7 @@ import { getCollection } from 'astro:content';
 const allPosts = await getCollection('blog');
 const posts = allPosts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
 const featured = posts.find(p => p.data.featured);
-const rest = posts.filter(p => !p.data.featured);
+const rest = posts.filter(p => p.id !== featured?.id);
 const latestPostUrl = `/blog/${posts[0].id}`;
 ---
 

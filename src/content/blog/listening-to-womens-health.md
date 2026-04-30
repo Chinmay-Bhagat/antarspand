@@ -1,5 +1,7 @@
 ---
 title: "Listening to Women's Health"
+titleAccent: "Women's"
+cover: "/blog-covers/listening-to-womens-health.png"
 excerpt: "For most of a woman's life, the signals that matter most to her health move too slowly for a doctor's visit and too quickly for an annual panel. Wearables sit in the middle — and that is where the interesting data lives."
 date: "2026-04-20"
 dateDisplay: "Apr 2026"

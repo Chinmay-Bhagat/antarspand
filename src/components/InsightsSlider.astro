@@ -168,6 +168,8 @@
     const dotsEl  = document.getElementById('slider-dots');
     const slider  = document.getElementById('insights-slider');
     if (!track || !prev || !next || !dotsEl || !slider) return;
+    const trackEl = track;
+    const sliderEl = slider;
 
     const slides  = track.querySelectorAll('.slide');
     const dots    = dotsEl.querySelectorAll('.sdot') as NodeListOf<HTMLElement>;
@@ -179,11 +181,11 @@
       dots[current].classList.remove('on');
       dots[current].setAttribute('aria-selected', 'false');
       current = (idx + total) % total;
-      track.style.transform = `translateX(-${current * 100}%)`;
+      trackEl.style.transform = `translateX(-${current * 100}%)`;
       slides[current].setAttribute('aria-hidden', 'false');
       dots[current].classList.add('on');
       dots[current].setAttribute('aria-selected', 'true');
-      slider.setAttribute('aria-label', `Health insights, slide ${current + 1} of ${total}`);
+      sliderEl.setAttribute('aria-label', `Health insights, slide ${current + 1} of ${total}`);
     }
 
     slides.forEach((s, i) => s.setAttribute('aria-hidden', i === 0 ? 'false' : 'true'));
@@ -195,7 +197,7 @@
       dot.addEventListener('click', () => goTo(Number(dot.dataset.idx)));
     });
 
-    slider.addEventListener('keydown', (e: KeyboardEvent) => {
+    sliderEl.addEventListener('keydown', (e: KeyboardEvent) => {
       if (e.key === 'ArrowLeft')  goTo(current - 1);
       if (e.key === 'ArrowRight') goTo(current + 1);
     });
